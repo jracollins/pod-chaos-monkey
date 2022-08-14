@@ -1,0 +1,22 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: allow-manage-pods
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "watch", "list", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: allow-manage-pods-binding
+subjects:
+- kind: ServiceAccount
+  name: default
+  apiGroup: ""
+  namespace: pod-chaos-monkey
+roleRef:
+  kind: ClusterRole
+  name: allow-manage-pods
+  apiGroup: ""

@@ -1,0 +1,17 @@
+apiVersion: skaffold/v2beta27
+kind: Config
+metadata:
+  name: pod-chaos-monkey
+build:
+  local:
+    useDockerCLI: true
+  artifacts:
+  - image: pod-chaos-monkey
+    docker:
+      dockerfile: Dockerfile
+      target: production
+deploy:
+  kustomize:
+    paths:
+     - k8s/dummy-service
+     - k8s/pod-chaos-monkey

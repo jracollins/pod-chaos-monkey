@@ -1,0 +1,2 @@
+targetNamespace: workloads
+cronInterval: "0/5 * * * * *"

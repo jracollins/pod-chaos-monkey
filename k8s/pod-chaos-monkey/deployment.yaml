@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pod-chaos-monkey
+spec:
+  revisionHistoryLimit: 5
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: pod-chaos-monkey
+  template:
+    metadata:
+      labels:
+        app: pod-chaos-monkey
+    spec:
+      volumes:
+        - name: config
+          configMap:
+            name: config
+      containers:
+      - name: pod-chaos-monkey
+        image: pod-chaos-monkey
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: CONFIG_PATH
+          value: /app/config/config.yaml
+        volumeMounts:
+          - name: config
+            mountPath: "/app/config"
+            readOnly: true
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "256M"
+          limits:
+            cpu: "200m"
+            memory: "256M"

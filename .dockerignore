@@ -1,0 +1,7 @@
+.git
+.gitignore
+node_modules
+k8s
+skaffold.yaml
+dist
+config
