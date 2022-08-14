@@ -20,6 +20,8 @@ Or directly using docker:
 docker build -t pod-chaos-monkey --target production .
 ```
 
+There is also a Github actions workflow building the image on every push to master available@ https://github.com/jracollins/pod-chaos-monkey/pkgs/container/pod-chaos-monkey
+
 ## Running
 
 ### Local (in Cluster) Dev
